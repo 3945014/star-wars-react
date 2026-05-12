@@ -1,22 +1,36 @@
 import {useEffect, useState} from "react";
-import {baseUrl} from "../utils/constants.js";
+import {baseUrl, periodMonth} from "../utils/constants.js";
 
 const AboutMe = () => {
-    const [hero, setHero] = useState();
+    const [hero, setHero] = useState(() => {
+        const hero = JSON.parse(localStorage.getItem('hero'));
+        if(hero && (Date.now() - hero.timestamp < periodMonth)){
+            return hero.payload;
+        }
+    });
 
     useEffect(() => {
-        fetch(`${baseUrl}/v1/peoples/1`)
-            .then(res => res.json())
-            .then(data => setHero({
-                name: data.name,
-                gender: data.gender,
-                bithYear: data.bith_year,
-                height: data.height,
-                mass: data.mass,
-                hairColor: data.hair_color,
-                eyeColor: data.eye_color,
-                skinColor: data.skin_color
-            }))
+        if(!hero) {
+            fetch(`${baseUrl}/v1/peoples/1`)
+                .then(res => res.json())
+                .then(data => {
+                    const info = {
+                        name: data.name,
+                        gender: data.gender,
+                        bithYear: data.bith_year,
+                        height: data.height,
+                        mass: data.mass,
+                        hairColor: data.hair_color,
+                        eyeColor: data.eye_color,
+                        skinColor: data.skin_color
+                    };
+                    setHero(info);
+                    localStorage.setItem('hero', JSON.stringify({
+                        payload: info,
+                        timestamp: Date.now()
+                    }));
+                })
+        }
     }, []);
 
     return (
