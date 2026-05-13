@@ -12,6 +12,7 @@ const Contacts = () => {
         return [];
     });
 
+
     useEffect(() => {
         if (planets.length === 0) {
             fetch(`${baseUrl}/v1/planets`)
