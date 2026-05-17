@@ -7,6 +7,7 @@ import friend6 from '../assets/friend6.jpg'
 import friend7 from '../assets/friend7.jpg'
 import friend8 from '../assets/friend8.jpg'
 import friend9 from '../assets/friend9.jpg'
+import {createContext} from "react";
 
 export const navItems = ['Home', 'About me', 'Star War', 'Contact'];
 export const friends = [friend1, friend2, friend3, friend4, friend5, friend6, friend7, friend8, friend9];
@@ -18,3 +19,4 @@ export const starWarsInfo = `Star Wars is an American media franchise created by
             All nine films, collectively referred to as the "Skywalker Saga", were nominated for Academy Awards, with Oscars going to the first three releases. Together with the spin-off films Rogue One (2016) and Solo (2018), the combined box office revenue of Star Wars theatrical live-action films equals over US$10 billion, making Star Wars the third-highest-grossing film franchise in cinematic history.
         `
 export const baseUrl = 'https://sw-info-api.herokuapp.com';
+export const PageContext = createContext();
